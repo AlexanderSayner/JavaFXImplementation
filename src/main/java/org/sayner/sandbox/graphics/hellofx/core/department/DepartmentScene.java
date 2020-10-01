@@ -51,8 +51,8 @@ public class DepartmentScene extends AbstractScene {
                         .placeOnInstrumentsPane(updateButton(event -> {
                             final Department selectedDepartment = departmentTable.getSelectedDepartment();
                             logger.info("Updating {}", selectedDepartment.toString());
-                            nameTextField.deleteText(0, nameTextField.getText().length());
                             departmentService.update(selectedDepartment, nameTextField.getText());
+                            nameTextField.deleteText(0, nameTextField.getText().length());
                             departmentTable.updateTable();
                         }))
                         .placeOnInstrumentsPane(deleteButton(exitEvent))
