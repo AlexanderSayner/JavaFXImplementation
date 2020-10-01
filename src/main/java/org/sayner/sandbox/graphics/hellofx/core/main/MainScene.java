@@ -81,7 +81,7 @@ public class MainScene extends AbstractScene {
 
     private Button button(String title, String shortTitle, String path, double width, double height) {
         try {
-            return baseButton(title, shortTitle, path, width, height,"-fx-font: 22 arial; -fx-base: #b6e7c9;",500);
+            return baseButton(title, path, width, height,"-fx-font: 22 arial; -fx-base: #b6e7c9;",500);
         } catch (IOException e) {
             logger.warn("Can't open {} console icon: {}", shortTitle, e.getMessage());
         }

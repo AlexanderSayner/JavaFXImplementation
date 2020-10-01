@@ -1,13 +1,10 @@
 package org.sayner.sandbox.graphics.hellofx;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.sayner.sandbox.graphics.hellofx.core.department.DepartmentScene;
-import org.sayner.sandbox.graphics.hellofx.core.main.MainScene;
 import org.sayner.sandbox.graphics.hellofx.core.welcome.WelcomeScene;
-import org.sayner.sandbox.graphics.hellofx.stage.DepartmentStage;
-import org.sayner.sandbox.graphics.hellofx.stage.MainStage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -31,6 +28,7 @@ import java.io.InputStream;
  */
 public class HelloFXApplication extends Application {
     private static final Logger logger = LoggerFactory.getLogger(HelloFXApplication.class);
+    public static final ObjectMapper OBJECT_MAPPER=new ObjectMapper();
 
     public static void main(String[] args) {
         logger.info("Application has started");
@@ -56,30 +54,8 @@ public class HelloFXApplication extends Application {
         } catch (IOException e) {
             logger.warn("Can't open application icon: {}", e.getMessage());
         }
-
-        final Stage departmentStage = new DepartmentStage().getDepartmentStage();
-        final Stage mainStage = new MainStage().getMainStage();
-
-        departmentStage.setScene(
-                new DepartmentScene().createScene(exitEvent -> {
-                            departmentStage.close();
-                            mainStage.show();
-                        }
-                )
-        );
-        mainStage.setScene(
-                new MainScene().createScene(departmentEvent -> {
-                            mainStage.close();
-                            departmentStage.show();
-                        }
-                )
-        );
         primaryStage.setScene(
-                new WelcomeScene().createScene(event -> {
-                                    primaryStage.close();
-                                    mainStage.show();
-                                }
-                        )
+                new WelcomeScene().createScene(primaryStage)
         );
         primaryStage.show();
     }

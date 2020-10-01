@@ -3,13 +3,13 @@ package org.sayner.sandbox.graphics.hellofx.core;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import org.sayner.sandbox.graphics.hellofx.HelloFXApplication;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 
 public abstract class AbstractScene {
     protected Button baseButton(
             String title,
-            String shortTitle,
             String path,
             double imageWidth,
             double imageHeight,
@@ -25,5 +25,12 @@ public abstract class AbstractScene {
         button.setStyle(style);
         button.setPrefWidth(prefWidth);
         return button;
+    }
+
+    protected WebClient webClient(){
+        return WebClient
+                .builder()
+                .baseUrl("http://localhost:8080")
+                .build();
     }
 }

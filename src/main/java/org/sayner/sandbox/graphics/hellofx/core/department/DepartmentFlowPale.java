@@ -17,6 +17,7 @@ public class DepartmentFlowPale extends AbstractFlowPlane {
         flowPane.setVgap(20);
         flowPane.setAlignment(Pos.CENTER);
         tablePane = new FlowPane();
+        tablePane.setMinWidth(730);
         instrumentsPane = new FlowPane();
         initFlowPane(tablePane);
         initFlowPane(instrumentsPane);
