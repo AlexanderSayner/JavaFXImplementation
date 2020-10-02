@@ -1,6 +1,7 @@
 package org.sayner.sandbox.graphics.hellofx.stage;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.sayner.sandbox.graphics.hellofx.HelloFXApplication;
 import org.slf4j.Logger;
@@ -22,7 +23,9 @@ public abstract class AbstractStage {
         stage.setScene(createScene());
     }
 
-    protected abstract Scene createScene();
+    protected Scene createScene() {
+        return new Scene(new StackPane());
+    }
 
     public Stage getStage() {
         return stage;

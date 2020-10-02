@@ -14,13 +14,13 @@ import java.io.IOException;
 public class MainScene extends AbstractScene {
     private final Logger logger = LoggerFactory.getLogger(MainScene.class);
 
-    public Scene createScene(EventHandler<? super MouseEvent> departmentEvent) {
+    public Scene createScene(EventHandler<? super MouseEvent> projectEvent,EventHandler<? super MouseEvent> departmentEvent) {
         final ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(
                 new MainFlowPlane()
                         .place(clientsButton())
                         .place(employeeButton())
-                        .place(projectsButton())
+                        .place(projectsButton(projectEvent))
                         .place(departmentsButton(departmentEvent))
                         .place(rolesButton())
                         .getFlowPane()
@@ -48,13 +48,15 @@ public class MainScene extends AbstractScene {
                 150);
     }
 
-    private Button projectsButton() {
-        return button(
+    private Button projectsButton(EventHandler<? super MouseEvent> event) {
+        final Button button = button(
                 "Projects working console",
                 "projects",
                 "icons/game-controller.png",
                 150,
                 150);
+        button.setOnMouseClicked(event);
+        return button;
         
     }
 
