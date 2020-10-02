@@ -5,14 +5,19 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.sayner.sandbox.graphics.hellofx.core.department.DepartmentScene;
 import org.sayner.sandbox.graphics.hellofx.core.main.MainScene;
-import org.sayner.sandbox.graphics.hellofx.stage.DepartmentStage;
-import org.sayner.sandbox.graphics.hellofx.stage.MainStage;
+import org.sayner.sandbox.graphics.hellofx.core.project.ProjectScene;
+import org.sayner.sandbox.graphics.hellofx.stage.*;
 
+// TODO: перенести логику создания сцены в Stage классы
 public class WelcomeScene {
     public Scene createScene(Stage onCloseStage) throws Exception {
         final Stage mainStage = new MainStage().getMainStage();
         final Stage departmentStage = new DepartmentStage().getStage();
+        final Stage projectsStage=new ProjectStage().getStage();
 
+        projectsStage.setScene(
+                new ProjectScene().createScene()
+        );
         departmentStage.setScene(
                 new DepartmentScene().createScene(exitEvent -> {
                             departmentStage.close();
@@ -21,7 +26,12 @@ public class WelcomeScene {
                 )
         );
         mainStage.setScene(
-                new MainScene().createScene(departmentEvent -> {
+                new MainScene().createScene(
+                        projectEvent->{
+                            mainStage.close();
+                            projectsStage.show();
+                        },
+                        departmentEvent -> {
                             mainStage.close();
                             departmentStage.show();
                         }

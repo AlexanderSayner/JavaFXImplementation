@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.sayner.sandbox.graphics.hellofx.core.AbstractScene;
+import org.sayner.sandbox.graphics.hellofx.core.TwoPartFlowPale;
 import org.sayner.sandbox.graphics.hellofx.model.Department;
 import org.sayner.sandbox.graphics.hellofx.service.DepartmentService;
 import org.sayner.sandbox.graphics.hellofx.widget.DepartmentTable;
@@ -35,13 +36,13 @@ public class DepartmentScene extends AbstractScene {
         departmentTable.getTable().setOnMouseClicked(event -> {
             final Department string = departmentTable.getSelectedDepartment();
             if (string != null) {
-                nameTextField.setText(string.toString());
+                nameTextField.setText(string.getName());
             } else {
                 nameTextField.setText("none");
             }
         });
         return new Scene(
-                new DepartmentFlowPale()
+                new TwoPartFlowPale()
                         .placeOnTablePane(departmentTable.getTable())
                         .placeOnInstrumentsPane(addButton(event -> {
                             departmentService.add(nameTextField.getText());

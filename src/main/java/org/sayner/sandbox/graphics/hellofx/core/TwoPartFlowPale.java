@@ -1,16 +1,15 @@
-package org.sayner.sandbox.graphics.hellofx.core.department;
+package org.sayner.sandbox.graphics.hellofx.core;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
-import org.sayner.sandbox.graphics.hellofx.core.AbstractFlowPlane;
 
-public class DepartmentFlowPale extends AbstractFlowPlane {
+public class TwoPartFlowPale extends AbstractFlowPlane {
     private final FlowPane tablePane;
     private final FlowPane instrumentsPane;
 
-    public DepartmentFlowPale() {
+    public TwoPartFlowPale() {
         super(new FlowPane());
         flowPane.setPadding(new Insets(15, 15, 15, 15));
         flowPane.setHgap(10);
@@ -31,12 +30,12 @@ public class DepartmentFlowPale extends AbstractFlowPlane {
         flowPane.setPrefWidth(150);
     }
 
-    public DepartmentFlowPale placeOnTablePane(Node node) {
+    public TwoPartFlowPale placeOnTablePane(Node node) {
         tablePane.getChildren().add(node);
         return this;
     }
 
-    public DepartmentFlowPale placeOnInstrumentsPane(Node node) {
+    public TwoPartFlowPale placeOnInstrumentsPane(Node node) {
         instrumentsPane.getChildren().add(node);
         return this;
     }
