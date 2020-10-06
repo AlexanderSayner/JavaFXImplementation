@@ -15,10 +15,10 @@ public abstract class AbstractRestClient {
     protected WebClient webClient;
     protected ObjectMapper mapper;
 
-    public AbstractRestClient(WebClient webClient, ObjectMapper mapper,Logger logger) {
+    public AbstractRestClient(WebClient webClient, ObjectMapper mapper, Logger logger) {
         this.webClient = webClient;
         this.mapper = mapper;
-        this.logger=logger;
+        this.logger = logger;
     }
 
     protected <T> Object sendPostRequest(String uri, Object request, Class<T> responseElement) {
@@ -41,39 +41,35 @@ public abstract class AbstractRestClient {
     }
 
     protected <T> Object sendPutRequest(String uri, Integer uriParam, Object request, Class<T> responseElement) {
-        return restRequestTemplate(webClient -> {
-            return webClient
-                    .put()
-                    .uri(uriBuilder ->uriBuilder
-                            .path(uri)
-                            .build(uriParam)
-                    )
-                    .header("Content-Type", "application/json")
-                    .bodyValue(request)
-                    .retrieve()
-                    .onStatus(
-                            HttpStatus::isError,
-                            clientResponse -> handleError(clientResponse.statusCode())
-                    )
-                    .bodyToMono(responseElement)
-                    .block();
-        });
+        return restRequestTemplate(webClient -> webClient
+                .put()
+                .uri(uriBuilder -> uriBuilder
+                        .path(uri)
+                        .build(uriParam)
+                )
+                .header("Content-Type", "application/json")
+                .bodyValue(request)
+                .retrieve()
+                .onStatus(
+                        HttpStatus::isError,
+                        clientResponse -> handleError(clientResponse.statusCode())
+                )
+                .bodyToMono(responseElement)
+                .block());
     }
 
     protected <T> Object sendGetRequest(String uri, Class<T> responseElement) {
-        return restRequestTemplate(webClient -> {
-            return webClient
-                    .get()
-                    .uri(uri)
-                    .header("Content-Type", "application/json")
-                    .retrieve()
-                    .onStatus(
-                            HttpStatus::isError,
-                            clientResponse -> handleError(clientResponse.statusCode())
-                    )
-                    .bodyToMono(responseElement)
-                    .block();
-        });
+        return restRequestTemplate(webClient -> webClient
+                .get()
+                .uri(uri)
+                .header("Content-Type", "application/json")
+                .retrieve()
+                .onStatus(
+                        HttpStatus::isError,
+                        clientResponse -> handleError(clientResponse.statusCode())
+                )
+                .bodyToMono(responseElement)
+                .block());
     }
 
     /**

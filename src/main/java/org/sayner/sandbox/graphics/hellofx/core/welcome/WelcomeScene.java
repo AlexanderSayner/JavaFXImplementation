@@ -13,7 +13,7 @@ public class WelcomeScene {
     public Scene createScene(Stage onCloseStage) throws Exception {
         final Stage mainStage = new MainStage().getMainStage();
         final Stage departmentStage = new DepartmentStage().getStage();
-        final Stage projectsStage=new ProjectStage().getStage();
+        final Stage projectsStage = new ProjectStage().getStage();
 
         projectsStage.setScene(
                 new ProjectScene().createScene()
@@ -27,7 +27,7 @@ public class WelcomeScene {
         );
         mainStage.setScene(
                 new MainScene().createScene(
-                        projectEvent->{
+                        projectEvent -> {
                             mainStage.close();
                             projectsStage.show();
                         },

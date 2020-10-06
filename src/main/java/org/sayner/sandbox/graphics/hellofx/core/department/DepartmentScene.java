@@ -19,22 +19,23 @@ import java.util.List;
 public class DepartmentScene extends AbstractScene {
     private final Logger logger = LoggerFactory.getLogger(DepartmentScene.class);
     private final DepartmentService departmentService = new DepartmentService(webClient());
-    private final DepartmentTable departmentTable = new DepartmentTable() {
-        @Override
-        protected List<Department> getData() {
-            return departmentService.getList();
-        }
-    };
+    private final DepartmentTable departmentTable;
     private final TextField nameTextField = new TextField();
 
     public DepartmentScene() {
+        departmentTable = new DepartmentTable() {
+            @Override
+            protected List<Department> getData() {
+                return departmentService.getList();
+            }
+        };
     }
 
     public Scene createScene(EventHandler<? super MouseEvent> exitEvent) {
         nameTextField.setPrefWidth(270);
         nameTextField.setPromptText("name");
         departmentTable.getTable().setOnMouseClicked(event -> {
-            final Department string = departmentTable.getSelectedDepartment();
+            final Department string = departmentTable.getSelectedItem();
             if (string != null) {
                 nameTextField.setText(string.getName());
             } else {
@@ -50,7 +51,7 @@ public class DepartmentScene extends AbstractScene {
                             nameTextField.deleteText(0, nameTextField.getText().length());
                         }))
                         .placeOnInstrumentsPane(updateButton(event -> {
-                            final Department selectedDepartment = departmentTable.getSelectedDepartment();
+                            final Department selectedDepartment = departmentTable.getSelectedItem();
                             logger.info("Updating {}", selectedDepartment.toString());
                             departmentService.update(selectedDepartment, nameTextField.getText());
                             nameTextField.deleteText(0, nameTextField.getText().length());

@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import org.sayner.sandbox.graphics.hellofx.core.AbstractFlowPlane;
 
 public class WelcomeFlowPlane extends AbstractFlowPlane {
-
     public WelcomeFlowPlane(EventHandler<? super MouseEvent> event) {
         super(new FlowPane());
         flowPane.setPadding(new Insets(15,15,15,15));
