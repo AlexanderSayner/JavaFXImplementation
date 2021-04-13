@@ -5,6 +5,7 @@ import org.sayner.sandbox.graphics.hellofx.dto.ProjectListResponse;
 import org.sayner.sandbox.graphics.hellofx.model.Project;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -16,8 +17,7 @@ public class ProjectService extends AbstractRestClient{
 
     public List<Project> getList() {
         logger.info("Sending request for project list data");
-        return ((ProjectListResponse) sendGetRequest("/api/project", ProjectListResponse.class))
-                .getProjects();
+        return Arrays.asList((Project[]) sendGetRequest("/api/project", Project[].class));
     }
 /*
     public List<FullProjectDto> getFullProjectInfo(){
